@@ -8,5 +8,5 @@ for pred_idx in range(len(predictions)):
     if predictions[pred_idx] == labels[pred_idx]:
         n_correct += 1
 
-accuracy = n_correct/len(predictions)
-print("accuracy[%]: ", accuracy*100, '%')
+accuracy = n_correct / len(predictions)
+print("accuracy[%]: ", accuracy * 100, '%')

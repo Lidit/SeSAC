@@ -25,29 +25,27 @@ for student_idx in range(n_student):
         class_score_sum[class_idx] += scores[student_idx][class_idx]
         class_score_square_sum[class_idx] += scores[student_idx][class_idx] ** 2
 
-
 # 평균
 for sum_class in class_score_sum:
-    class_score_means.append(sum_class/n_student)
+    class_score_means.append(sum_class / n_student)
 
 # 과목별 제곱의 평균
 mean_of_squares_of_class = list()
 for square_sum in class_score_square_sum:
-    mean_of_squares_of_class.append(square_sum/n_student)
+    mean_of_squares_of_class.append(square_sum / n_student)
 
 # 과목별 평균의 제곱
 square_of_mean_of_class = list()
 for mean in class_score_means:
-    square_of_mean_of_class.append(mean**2)
-
+    square_of_mean_of_class.append(mean ** 2)
 
 variances = list()
 for variance_idx in range(len(square_of_mean_of_class)):
-    variances.append(mean_of_squares_of_class[variance_idx]-square_of_mean_of_class[variance_idx])
+    variances.append(mean_of_squares_of_class[variance_idx] - square_of_mean_of_class[variance_idx])
 
 stds = list()
 for std_idx in range(len(variances)):
-    stds.append(variances[std_idx]**0.5)
+    stds.append(variances[std_idx] ** 0.5)
 
 print("sum of classes's score: ", class_score_sum)
 print("mean of classes's scores: ", class_score_means)

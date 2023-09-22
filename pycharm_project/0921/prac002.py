@@ -4,8 +4,8 @@
 # Accuracy == (TP + TN) / TP + FN + FP + TN
 # precision(정밀도) == 모델이 P로 분류한 것 중 실제 positive == TP / TP + FP
 
-predictions = [0,1,0,2,1,2,0]
-labels = [1,1,0,0,1,2,1]
+predictions = [0, 1, 0, 2, 1, 2, 0]
+labels = [1, 1, 0, 0, 1, 2, 1]
 
 M_class = None
 
@@ -26,8 +26,8 @@ for pred_idx in range(len(predictions)):
 
     class_cnts[label] += 1
     if pred == label:
-        correct_cnts[label] +=1
+        correct_cnts[label] += 1
 
 for class_idx in range(M_class):
-    confusion_vec[class_idx] = correct_cnts[class_idx]/class_cnts[class_idx]
-print("confusion Vector: ",confusion_vec)
+    confusion_vec[class_idx] = correct_cnts[class_idx] / class_cnts[class_idx]
+print("confusion Vector: ", confusion_vec)

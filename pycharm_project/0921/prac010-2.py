@@ -2,12 +2,12 @@
 
 scores = [[10, 15, 20], [20, 25, 30], [30, 35, 40], [40, 45, 50]]
 
+n_student = len(scores)
 n_class = len(scores[0])
 class_score_means = list()
-
-n_student = len(scores)
 class_score_sum = list()
-# 과목별 제곱
+
+# 점수 제곱
 class_score_square_sum = list()
 sqaure_scores = list()
 
@@ -105,6 +105,6 @@ for std_idx in range(len(variances)):
     stds.append(variances[std_idx] ** 0.5)
 
 print("---after standardization---", )
-print(scores)
+print("scores after standardization: ", scores)
 print("means of classes: ", square_of_mean_of_class)
 print("classes scores stds:", stds)

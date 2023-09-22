@@ -14,7 +14,7 @@ for student_idx in range(n_student):
         class_score_sum[class_idx] += scores[student_idx][class_idx]
 
 for sum_class in class_score_sum:
-    class_score_means.append(sum_class/n_student)
+    class_score_means.append(sum_class / n_student)
 
 print("sum of classes's score: ", class_score_sum)
 print("mean of classes's scores: ", class_score_means)
