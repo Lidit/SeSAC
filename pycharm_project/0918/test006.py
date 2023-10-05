@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-
 fig, ax = plt.subplots(figsize=(10, 10))
 
 ax1 = fig.add_subplot()

@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-figsize= (7, 7)
+figsize = (7, 7)
 
 fig, ax = plt.subplots(figsize=figsize)
 fig.suptitle('Title of figure')

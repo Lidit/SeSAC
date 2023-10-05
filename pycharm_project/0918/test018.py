@@ -5,11 +5,11 @@ import numpy as np
 
 np.random.seed(0)
 
-x_min, x_max= -5, 5
+x_min, x_max = -5, 5
 n_data = 300
 
 x_data = np.random.uniform(x_min, x_max, (n_data,))
-y_data = x_data + 0.5*np.random.normal(0,1, n_data) # 일종의 노이즈?
+y_data = x_data + 0.5 * np.random.normal(0, 1, n_data)  # 일종의 노이즈?
 
 pred_x = np.linspace(x_min, x_max, 2)
 pred_y = pred_x

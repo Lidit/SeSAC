@@ -15,4 +15,3 @@ ax.text(x=0.5, y=0, s='Hello2', fontsize=30)
 ax.text(x=0.5, y=-0.5, s='Hello3', fontsize=30)
 
 plt.show()
-
