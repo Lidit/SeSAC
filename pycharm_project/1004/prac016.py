@@ -21,3 +21,6 @@ iris_X, iris_y = iris.data, iris.target
 
 print(iris_X)
 print(iris_y)
+print(feature_names)
+print(species)
+print(n_feature)

@@ -23,3 +23,4 @@ ax.tick_params(labelsize=20)
 
 # print(t)
 ax.grid()
+plt.show()
