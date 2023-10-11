@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# np.random.seed(15)
+np.random.seed(15)
 
 n_classes = 4
 n_data = 100
@@ -35,12 +35,12 @@ test_data = np.random.uniform(low=-10, high=10, size=(2,))
 # print(e_distances)
 
 # broadcast 활용 euclidean distance 구하기
-e_distances = np.sqrt(np.sum((x_data - test_data) ** 2, axis=1))
-k = 5
-indices = np.argsort(e_distances)[:k]
-k_nearest_labels = y_data[indices]
-unique_labels, counts = np.unique(k_nearest_labels, return_counts=True)
-predicted_label = unique_labels[np.argmax(counts)]
+# e_distances = np.sqrt(np.sum((x_data - test_data) ** 2, axis=1))
+# k = 5
+# indices = np.argsort(e_distances)[:k]
+# k_nearest_labels = y_data[indices]
+# unique_labels, counts = np.unique(k_nearest_labels, return_counts=True)
+# predicted_label = unique_labels[np.argmax(counts)]
 
 
 def knn_classifier(t_data, data, k=5):

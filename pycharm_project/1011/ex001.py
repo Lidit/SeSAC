@@ -13,24 +13,32 @@ x_data = np.random.uniform(low=-10, high=10, size=(n_data, 2))
 
 centroids = x_data[np.random.choice(len(x_data), k, replace=False)]
 print(centroids)
-cnt = 0
-for _ in range(len(x_data)):
-    cnt += 1
-    distances = np.linalg.norm(x_data[:, np.newaxis, :] - centroids, axis=2)
-    # print(distances)
-    data_classes = np.argmin(distances, axis=1)
-    # print(data_classes)
-    new_centroids = np.array([x_data[data_classes == i].mean(axis=0) for i in range(k)])
-    # print(new_centroids)
-    if np.all(centroids == new_centroids):
-        break
+# cnt = 0
+# for _ in range(len(x_data)):
+#     cnt += 1
+#     distances = np.linalg.norm(x_data[:, np.newaxis, :] - centroids, axis=2)
+#     # print(distances)
+#     data_classes = np.argmin(distances, axis=1)
+#     # print(data_classes)
+#     new_centroids = np.array([x_data[data_classes == i].mean(axis=0) for i in range(k)])
+#     # print(new_centroids)
+#     if np.all(centroids == new_centroids):
+#         break
+#
+#     centroids = new_centroids
 
-    centroids = new_centroids
-
-print(centroids)
-print(x_data.shape)
-print(data_classes.shape)
-
+distances = np.linalg.norm(x_data[:, np.newaxis, :] - centroids, axis=2)
+print(x_data[:, np.newaxis, :])
+print(x_data)
+# print(distances)
+# print(distances[0,1])
+# print(distances.shape)
+# data_classes = np.argmin(distances, axis=1)
+# print(data_classes)
+# print(centroids)
+# print(x_data.shape)
+# print(data_classes.shape)
+# print(data_classes)
 
 # plt.show()
 
