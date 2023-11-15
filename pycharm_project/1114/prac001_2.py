@@ -32,14 +32,15 @@ for epoch in range(EPOCHS):
         epoch_losses.append(loss[0])
 
         pred_binary = (pred >= 0.5).astype(int)
-        if pred_binary == y_:
-            epoch_accuracy.append(1)
-            print("accuracy = 1")
-        else:
-            epoch_accuracy.append(0)
-            print("accuracy = 0")
+        # if pred_binary == y_:
+        #     epoch_accuracy.append(1)
+        #     print("accuracy = 1")
+        # else:
+        #     epoch_accuracy.append(0)
+        #     print("accuracy = 0")
+        epoch_accuracy.append(abs(pred_binary - y_))
 
-    accuracies.append(np.sum(epoch_accuracy) / len(y))
+    accuracies.append(epoch_accuracy.count(0) / len(y))
     bce_losses.append(np.mean(epoch_losses))
 
 print(bce_losses)
