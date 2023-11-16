@@ -77,8 +77,8 @@ EPOCHS = 10000
 np.random.seed(7)
 X = np.array([0, 0, 1, 0, 0, 1, 1, 1]).reshape(4, 2)
 y = np.array([0, 1, 1, 0])
-print(X)
-print(y)
+# print(X)
+# print(y)
 # Instantiation
 neuron1 = Model()
 neuron2 = Model()
