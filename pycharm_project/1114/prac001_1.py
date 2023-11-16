@@ -1,11 +1,11 @@
 import numpy as np
 
-np.random.seed(0)
+
 
 
 class BCELoss:
     def forward(self, y, pred):
-        j = -(y * np.log(pred) + ((1 - y) * np.log(1 - pred)))
+        j = -( y * np.log(pred) + ( (1 - y) * np.log(1 - pred) ) )
         self.y = y
         self.y_pred = pred
         return j
@@ -70,7 +70,7 @@ class Model:
         print(f"갱신된 b: {self.affine.b}")
 
 if __name__ == '__main__':
-
+    np.random.seed(0)
 
     model = Model()
     loss_function = BCELoss()

@@ -20,7 +20,6 @@ for epoch in range(EPOCHS):
     epoch_losses = []
     epoch_accuracy = []
     for X_, y_ in zip(X, y):
-
         # training
         pred = model.forward(X_)
         loss = loss_function.forward(y_, pred)
@@ -28,17 +27,12 @@ for epoch in range(EPOCHS):
         print(f"loss={loss}")
         model.backward(loss_function.backward(), lr=LR)
 
-        # Methric(loss, accuracy) Calcuations
+        # Metric(loss, accuracy) Calculations
         epoch_losses.append(loss[0])
 
+        # 예측값을 이진 변환. 예측값이 0.5 이상이면 1, 0.5 미만이면 0으로
         pred_binary = (pred >= 0.5).astype(int)
-        # if pred_binary == y_:
-        #     epoch_accuracy.append(1)
-        #     print("accuracy = 1")
-        # else:
-        #     epoch_accuracy.append(0)
-        #     print("accuracy = 0")
-        epoch_accuracy.append(abs(pred_binary - y_))
+        epoch_accuracy.append(abs(pred_binary - y_))  # 이진변환된 값이 정답과 같다면 0, 다르다면 1이 epoch_accuracy list에 append된다.
 
     accuracies.append(epoch_accuracy.count(0) / len(y))
     bce_losses.append(np.mean(epoch_losses))
