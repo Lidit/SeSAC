@@ -73,7 +73,7 @@ class Model:
 
 
 LR = 0.1
-EPOCHS = 10000
+EPOCHS = 7000
 
 neuron1 = Model(2)
 neuron2 = Model(2)
@@ -98,8 +98,8 @@ def generate_nonlinear_data_triangle(num_samples):
 num_samples = 500
 X, y = generate_nonlinear_data_triangle(num_samples)
 
-x1 = np.linspace(-1.5, 1.5, 100)
-x2 = np.linspace(-1.5, 1.5, 100)
+x1 = np.linspace(-2, 2, 100)
+x2 = np.linspace(-2, 2, 100)
 X1, X2 = np.meshgrid(x1, x2)
 X_db = np.hstack([X1.reshape(-1, 1), X2.reshape(-1, 1)])
 # x1 = np.linspace(-1.5, 1.5, 100)
@@ -121,7 +121,7 @@ axes = axes.flatten()
 for epoch in range(1, EPOCHS + 1):
     epoch_losses = []
     epoch_accuracy = []
-    print("epoch: ", epoch)
+    # print("epoch: ", epoch)
     # vs_binary_pred = []
     for X_, y_ in zip(X, y):
         # training
@@ -148,7 +148,7 @@ for epoch in range(1, EPOCHS + 1):
     accuracies.append(epoch_accuracy.count(0) / len(y))
     bce_losses.append(np.mean(epoch_losses))
 
-    if epoch % 625 == 0 and epoch > 1:
+    if epoch % 500 == 0 and epoch > 1:
         y_db = []
         for x_db in X_db:
             p1 = neuron1.forward(x_db)
@@ -156,7 +156,7 @@ for epoch in range(1, EPOCHS + 1):
             p3 = neuron3.forward(x_db)
             # 주어진 x_db에 따른 최종 예측 결과를 y_db 에 append
             y_db.append(neuron4.forward([p1[0], p2[0], p3[0]]))
-        axes[(epoch // 625) - 1].scatter(X_db[:, 0], X_db[:, 1], c=y_db, cmap='bwr')
+        axes[(epoch // 500) - 1].scatter(X_db[:, 0], X_db[:, 1], c=y_db, cmap='bwr')
         print("epoch: ", epoch)
 
 plt.show()
