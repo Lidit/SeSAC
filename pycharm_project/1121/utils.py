@@ -22,7 +22,8 @@ def train_MNIST(data, N_SAMPLES, model, loss_function, optimizer, DEVICE):
     epoch_loss = 0.
     epoch_corrects = 0
     for X_, y_ in data:
-        X_, y_ = X_.view(-1, 28 * 28).to(DEVICE), y_.to(DEVICE)
+        X_, y_ = X_.to(DEVICE), y_.to(DEVICE)
+        X_ = X_.reshape(data.batch_size, -1)
 
         pred = model.forward(X_)
         loss = loss_function(pred, y_)
