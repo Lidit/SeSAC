@@ -4,15 +4,13 @@ import torch
 from torch.utils.data import TensorDataset, DataLoader
 from torch.optim import SGD
 import matplotlib.pyplot as plt
-import numpy as np
 from tqdm import tqdm
-import time
 from model import Classifier
 from utils import get_classification_dataset, get_device, train_classification, vis_decision_boundary
 
 DEVICE = get_device()
 
-# hyper prameter
+# hyper parameter
 EPOCHS = 50
 N_SAMPLES = 200
 BATCH_SIZE = 8
