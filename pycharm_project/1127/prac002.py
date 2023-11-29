@@ -59,13 +59,14 @@ class VGG11(nn.Module):
         x = self.layer3(x)
         x = self.layer4(x)
         x = self.layer5(x)
-        x = self.fc_layer(x.view(-1, 512 * 7 * 7))
+        x = x.view(x.shape[0], -1)
+        x = self.fc_layer(x)
 
         return x
 
 
 C, H, W = 3, 224, 224
-input_tensor = torch.rand(size=(C, H, W))
+input_tensor = torch.rand(size=(1, C, H, W))
 
 model = VGG11()
 
