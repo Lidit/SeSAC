@@ -1,5 +1,5 @@
 *.gz
-.csv
+*.csv
 
 raw/
 .idea/

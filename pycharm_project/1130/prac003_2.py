@@ -71,12 +71,12 @@ class ResNet(nn.Module):
         return x
 
 
-def resnet34():
+def ResNet34():
     return ResNet(n_blocks_list=[3, 4, 6, 3])
 
 
 if __name__ == '__main__':
     from torchsummary import summary
 
-    model = resnet34().to('mps')
+    model = ResNet34().to('mps')
     summary(model, input_size=(3, 224, 224))
