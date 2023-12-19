@@ -1,5 +1,8 @@
 *.gz
 *.csv
+*.png
+*.log
+*.json
 
 raw/
 .idea/
