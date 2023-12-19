@@ -4,6 +4,7 @@ import os
 import data_manager
 
 from learners import PolicyLearner
+# from networks import Network, LSTMNetwork
 
 if __name__ == '__main__':
     stock_code = '005930'
@@ -34,12 +35,10 @@ if __name__ == '__main__':
 
     training_data = training_data[features_training_data]
 
-
-    policy_learner = PolicyLearner(stock_code=stock_code, chart_data=chart_data, training_data=training_data, min_trading_unit=1, max_traiding_unit=2, delayed_reward_threshold=.2, lr=.001)
+    policy_learner = PolicyLearner(stock_code=stock_code, chart_data=chart_data, training_data=training_data,
+                                   min_trading_unit=1, max_traiding_unit=2, delayed_reward_threshold=.2, lr=.001)
     policy_learner.fit(balance=10000000, num_epoch=1000, discount_factor=0, start_epsilon=.5)
 
     model_dir = os.path.join('models/s' % stock_code)
     model_path = os.path.join(model_dir, 'models/s' % stock_code)
     policy_learner.policy_network.save_model(model_path)
-
-

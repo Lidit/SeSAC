@@ -8,7 +8,6 @@ import torch
 from torch.optim import SGD, Adam
 
 
-
 # class Network(nn.Module):
 #     lock = threading.Lock()
 #
@@ -111,15 +110,13 @@ from torch.optim import SGD, Adam
 #             (1, self.num_steps, self.input_dim))
 #         return super().predict(sample)
 
-
-
 class LSTMNetwork(nn.Module):
     def __init__(self, input_dim, seq_len, output_dim, hidden_dim, n_layers):
         super(LSTMNetwork, self).__init__()
+
         self.hidden_dim = hidden_dim
         self.seq_len = seq_len
         self.output_dim = output_dim
-        # self.hidden_size = hidden_dim
         self.n_layers = n_layers
 
         self.lstm = nn.LSTM(input_size=input_dim, hidden_size=hidden_dim, num_layers=n_layers)
@@ -129,8 +126,10 @@ class LSTMNetwork(nn.Module):
     def forward(self, x):
         # h0 = torch.zeros(self.n_layers, self.seq_len, self.hidden_dim)
         # c0 = torch.zeros(self.n_layers, self.seq_len, self.hidden_dim)
-        out, _status = self.lstm(x)
-        # out, _status = self.lstm(x, (h0.detach(), c0.detach()))
+        h0 = torch.zeros(self.n_layers, x.size(0), self.hidden_dim)
+        c0 = torch.zeros(self.n_layers, x.size(0), self.hidden_dim)
+        # out, _status = self.lstm(x)
+        out, _status = self.lstm(x, (h0.detach(), c0.detach()))
         out = self.batch_norm(out[:, -1])
         out = self.fc(out)
 
@@ -141,16 +140,17 @@ class LSTMNetwork(nn.Module):
     @staticmethod
     def train_on_batch(model, x, y, optimizer, loss):
         outputs = model.forward(x)
-        optimizer.zero_grad()
         loss = loss(outputs, y)
+        optimizer.zero_grad()
         loss.backward()
         optimizer.step()
 
 
 class PolicyNetwork:
     def __init__(self, input_dim, output_dim, lr=0.01):
+        # super(PolicyNetwork, self).__init__()
         self.model = LSTMNetwork(input_dim=input_dim, hidden_dim=256, output_dim=output_dim, seq_len=5, n_layers=3)
-        self.optimizer= SGD(model.parameters(), lr=lr)
+        self.optimizer = SGD(self.model.parameters(), lr=lr)
         self.loss_function = nn.CrossEntropyLoss()
         self.prob = None
 
@@ -178,6 +178,7 @@ class PolicyNetwork:
 if __name__ == '__main__':
     # from torchsummary import summary
     from torchinfo import summary
+    import torch
 
     model = LSTMNetwork(input_dim=5, output_dim=1, hidden_dim=256, n_layers=5, seq_len=5)
     # model = LSTMModel(7, 256, 5, 1)
@@ -187,11 +188,12 @@ if __name__ == '__main__':
 
     x = torch.randn(5, 5, 5)
     out = model(x)  # works
-    model.eval()
+    torch.mps.profiler.profile()
+    # model.eval()
     # summary(model, input_data=x, mode='train', depth=3,
     #         col_names=["input_size", "output_size", "num_params", "mult_adds"],
     #         row_settings=["var_names"])
-    policy = PolicyNetwork(input_dim=5, output_dim=1)
-    summary(policy.model, input_data=x, mode='train', depth=3,
-            col_names=["input_size", "output_size", "num_params", "mult_adds"],
-            row_settings=["var_names"])
+    # policy = PolicyNetwork(input_dim=5, output_dim=3)
+    # summary(policy.model, input_data=x, mode='train', depth=3,
+    #         col_names=["input_size", "output_size", "num_params", "mult_adds"],
+    #         row_settings=["var_names"])

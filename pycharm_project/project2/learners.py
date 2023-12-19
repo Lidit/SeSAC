@@ -10,7 +10,8 @@ import numpy as np
 from environment import Environment
 from agent import Agent
 # from base.networks import Network, LSTMNetwork
-from networks import PolicyNetwork
+from networks import LSTMNetwork
+# from networks import PolicyNetwork
 import logging
 
 # from base.visualizer import Visualizer
@@ -522,8 +523,8 @@ class PolicyLearner:
         self.training_data_idx = -1
 
         # 정책 신경망 -> 입력크기 = 학습데이터 크기 + 에이전트 상태 크기
-        self.num_features = self.training_data.shape[1], +self.agent.STATE_DIM
-        self.policy_network = PolicyNetwork(input_dim=self.num_features, output_dim=self.agent.NUM_ACTIONS, lr=lr)
+        self.num_features = self.training_data.shape[1], + self.agent.STATE_DIM
+        self.policy_network = LSTMNetwork(input_dim=self.num_features, output_dim=self.agent.NUM_ACTIONS)
 
     def reset(self):
         self.sample = None
@@ -645,7 +646,6 @@ class PolicyLearner:
                     # 학습 관련 정보 로그 기록
                     logger.info("Max PV: %s, \t # Win: %d"%(locale.currency(max_portfolio_value,grouping=True), epoch_win_cnt))
 
-
     def _get_batch(self, memory, batch_size, discount_factor, delayed_reward):
         x = np.zeros((batch_size, 1, self.num_features))
         y = np.full((batch_size,self.agent.NUM_ACTIONS), 0.5)
@@ -658,7 +658,7 @@ class PolicyLearner:
 
         return x, y
 
-    def build_sample(self):
+    def _build_sample(self):
         self.environment.observe()
         if len(self.training_data) > self.training_data_idx +1:
             self.training_data_idx +=1
